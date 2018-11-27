@@ -18,13 +18,55 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ToDoCellIdentifier" id="9aM-9f-4A1">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ToDoCellIdentifier" id="9aM-9f-4A1" customClass="ToDoTableViewCell" customModule="ToDoList" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9aM-9f-4A1" id="yYJ-ne-Mcr">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dLu-qV-KhC">
+                                            <rect key="frame" x="16" y="4" width="36" height="36"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="36" id="Ci0-uc-Sew"/>
+                                                <constraint firstAttribute="width" constant="36" id="be0-46-PQb"/>
+                                            </constraints>
+                                            <state key="normal" image="Unchecked"/>
+                                            <state key="selected" image="Checked"/>
+                                            <connections>
+                                                <action selector="completeButtonTapped:" destination="9aM-9f-4A1" eventType="touchUpInside" id="6GI-oP-aMv"/>
+                                                <action selector="isCompleteButtonTapped:" destination="JWW-xX-VXk" eventType="touchUpInside" id="N3N-Vw-NkB"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shk-E2-wQQ">
+                                            <rect key="frame" x="60" y="11.5" width="249" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4yv-JF-Bgh">
+                                            <rect key="frame" x="317" y="11.5" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="1" green="0.034920876080000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="shk-E2-wQQ" firstAttribute="centerY" secondItem="yYJ-ne-Mcr" secondAttribute="centerY" id="0y5-xB-PbW"/>
+                                        <constraint firstItem="4yv-JF-Bgh" firstAttribute="centerY" secondItem="yYJ-ne-Mcr" secondAttribute="centerY" id="8lp-0P-t4O"/>
+                                        <constraint firstItem="shk-E2-wQQ" firstAttribute="leading" secondItem="dLu-qV-KhC" secondAttribute="trailing" constant="8" id="KpS-3a-DTV"/>
+                                        <constraint firstItem="4yv-JF-Bgh" firstAttribute="trailing" secondItem="yYJ-ne-Mcr" secondAttribute="trailingMargin" id="d3E-DN-Fxh"/>
+                                        <constraint firstItem="dLu-qV-KhC" firstAttribute="centerY" secondItem="yYJ-ne-Mcr" secondAttribute="centerY" id="ihl-qm-PH5"/>
+                                        <constraint firstItem="dLu-qV-KhC" firstAttribute="leading" secondItem="yYJ-ne-Mcr" secondAttribute="leadingMargin" id="ip8-oA-eig"/>
+                                        <constraint firstItem="4yv-JF-Bgh" firstAttribute="leading" secondItem="shk-E2-wQQ" secondAttribute="trailing" constant="8" id="tfF-Z0-Qsc"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="isCompleteButton" destination="dLu-qV-KhC" id="h5b-gb-cdF"/>
+                                    <outlet property="priorityLabel" destination="4yv-JF-Bgh" id="GxB-cd-1rJ"/>
+                                    <outlet property="titleLabel" destination="shk-E2-wQQ" id="v09-Rm-waI"/>
+                                    <segue destination="Y6H-mm-dk7" kind="show" identifier="showDetails" id="Oey-LZ-g27"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -79,12 +121,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Remind me to..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U1h-VU-7xc">
-                                                    <rect key="frame" x="60" y="7" width="299" height="30"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TNo-qK-R9B">
                                                     <rect key="frame" x="16" y="4" width="36" height="36"/>
                                                     <constraints>
@@ -93,7 +129,20 @@
                                                     </constraints>
                                                     <state key="normal" image="Unchecked"/>
                                                     <state key="selected" image="Checked"/>
+                                                    <connections>
+                                                        <action selector="isCompleteButtonTapped:" destination="JWW-xX-VXk" eventType="touchUpInside" id="YYE-kN-YDs"/>
+                                                    </connections>
                                                 </button>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Remind me to..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U1h-VU-7xc">
+                                                    <rect key="frame" x="60" y="7" width="299" height="30"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="returnKeyTapped:" destination="JWW-xX-VXk" eventType="primaryActionTriggered" id="cVf-6i-MkP"/>
+                                                        <action selector="titleTextEditingChanged:" destination="JWW-xX-VXk" eventType="editingChanged" id="2S5-AZ-rsS"/>
+                                                    </connections>
+                                                </textField>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="U1h-VU-7xc" secondAttribute="trailing" id="1Wd-6Y-ed9"/>
@@ -131,6 +180,9 @@
                                                     <date key="date" timeIntervalSinceReferenceDate="564962596.42805898">
                                                         <!--2018-11-26 22:03:16 +0000-->
                                                     </date>
+                                                    <connections>
+                                                        <action selector="datePickerChanged:" destination="JWW-xX-VXk" eventType="primaryActionTriggered" id="1hD-CP-DNy"/>
+                                                    </connections>
                                                 </datePicker>
                                             </subviews>
                                             <constraints>
@@ -157,13 +209,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Priority" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="buX-sM-B1v">
-                                                    <rect key="frame" x="8" y="11.5" width="55" height="21"/>
+                                                    <rect key="frame" x="16" y="11.5" width="55" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="u9O-u7-wFN">
-                                                    <rect key="frame" x="267" y="8" width="100" height="29"/>
+                                                    <rect key="frame" x="259" y="8" width="100" height="29"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="Jjj-a5-9yW"/>
                                                     </constraints>
@@ -191,7 +243,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9r2-oK-cfG">
-                                                    <rect key="frame" x="16" y="8" width="343" height="27.5"/>
+                                                    <rect key="frame" x="24" y="11" width="327" height="22"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -251,6 +303,16 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="dueDateLabel" destination="aHm-OM-DLn" id="R9j-Gk-pnK"/>
+                        <outlet property="dueDatePickerView" destination="FMr-Xg-Ovu" id="aCT-lV-xmA"/>
+                        <outlet property="isCompleteButton" destination="TNo-qK-R9B" id="WR0-gY-fXk"/>
+                        <outlet property="notesTextView" destination="jtt-00-lYk" id="8Ue-15-7lg"/>
+                        <outlet property="prioritySegmentedControl" destination="u9O-u7-wFN" id="WXE-dV-iei"/>
+                        <outlet property="saveButton" destination="hdx-6W-e26" id="nLy-AW-jhw"/>
+                        <outlet property="titleTextField" destination="U1h-VU-7xc" id="KMK-7w-3V9"/>
+                        <outlet property="urlTextField" destination="9r2-oK-cfG" id="OlJ-sA-tib"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f7f-xc-Q2J" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="gex-Sc-oJE" userLabel="Exit" sceneMemberID="exit"/>
@@ -278,4 +340,7 @@
         <image name="Checked" width="44" height="44"/>
         <image name="Unchecked" width="44" height="44"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Oey-LZ-g27"/>
+    </inferredMetricsTieBreakers>
 </document>
